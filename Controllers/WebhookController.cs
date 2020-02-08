@@ -53,7 +53,6 @@ namespace WebhookDF.Controllers
 		}
 		
 
-		[HttpPost]
 		public ActionResult GetWebhookResponse([FromBody] System.Text.Json.JsonElement dados)
 		{
 			if (!Autorizado(Request.Headers))
@@ -74,7 +73,7 @@ namespace WebhookDF.Controllers
 
 				if (action == "ActionTesteWH") {
 
-					response.FulfillmentText = "testando o webhook";
+					response.FulfillmentText = "testando o webhook 2";
 				}
 
 			}
