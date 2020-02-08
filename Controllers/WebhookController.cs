@@ -79,19 +79,27 @@ namespace WebhookDF.Controllers
 				}
 				else if (action == "ActionCursoOferta")
 				{
+					DAL.CursoDAL dal = new DAL.CursoDAL();
+
 					if (parameters != null &&
 						parameters.Fields.ContainsKey("Cursos"))
 					{
 						var cursos = parameters.Fields["Cursos"];
 
-						string curso = cursos.ListValue.Values[0].StringValue;
-						DAL.CursoDAL dal = new DAL.CursoDAL();
-						if (dal.ObterCurso(curso) != null)
+						if (cursos.StringValue != "")
 						{
-							response.FulfillmentText = "Sim, temos " + curso + ".";
+							string curso = cursos.ListValue.Values[0].StringValue;
+							if (dal.ObterCurso(curso) != null)
+							{
+								response.FulfillmentText = "Sim, temos " + curso + ".";
+							}
 						}
-
+						else
+						{
+							response.FulfillmentText = "Não temos, mas temos esses: " + dal.ObterTodosFormatoTexto() + ".";
+						}
 					}
+				
 				}
 				else if (action == "ActionCursoValor")
 				{
@@ -109,7 +117,8 @@ namespace WebhookDF.Controllers
 							Models.Curso c = dal.ObterCurso(curso);
 							if (c != null)
 							{
-								response.FulfillmentText = "A mensalidade para " + c.Nome + " é " + c.Preco + ".";
+								response.FulfillmentText = 
+									"A mensalidade para " + c.Nome + " é " + c.Preco + ".";
 							}
 						}
 					}
