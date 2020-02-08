@@ -86,7 +86,7 @@ namespace WebhookDF.Controllers
 					{
 						var cursos = parameters.Fields["Cursos"];
 
-						if (cursos.StringValue != "")
+						if (cursos!= null && cursos.ListValue.Values.Count > 0)
 						{
 							string curso = cursos.ListValue.Values[0].StringValue;
 							if (dal.ObterCurso(curso) != null)
