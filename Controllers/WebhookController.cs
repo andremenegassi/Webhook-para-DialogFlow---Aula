@@ -52,7 +52,7 @@ namespace WebhookDF.Controllers
 			return false;
 		}
 		
-
+		[HttpPost("GetWebhookResponse")]
 		public ActionResult GetWebhookResponse([FromBody] System.Text.Json.JsonElement dados)
 		{
 			if (!Autorizado(Request.Headers))
@@ -70,8 +70,80 @@ namespace WebhookDF.Controllers
 			{
 
 				string action = request.QueryResult.Action;
+				var parameters = request.QueryResult.Parameters;
 
-				if (action == "ActionTesteWH") {
+				if (action == "ActionTesteWH")
+				{
+
+					response.FulfillmentText = "testando o webhook 2";
+				}
+				else if (action == "ActionCursoOferta")
+				{
+					if (parameters != null &&
+						parameters.Fields.ContainsKey("Cursos"))
+					{
+						var cursos = parameters.Fields["Cursos"];
+
+						string curso = cursos.ListValue.Values[0].StringValue;
+						DAL.CursoDAL dal = new DAL.CursoDAL();
+						if (dal.ObterCurso(curso) != null)
+						{
+							response.FulfillmentText = "Sim, temos " + curso + ".";
+						}
+
+					}
+				}
+				else if (action == "ActionCursoValor")
+				{
+					var contexto = request.QueryResult.OutputContexts;
+
+					if (contexto[0].ContextName.ContextId == "ctxcurso")
+					{
+						if (contexto[0].Parameters != null &&
+						contexto[0].Parameters.Fields.ContainsKey("Cursos"))
+						{
+							var cursos = contexto[0].Parameters.Fields["Cursos"];
+							string curso = cursos.ListValue.Values[0].StringValue;
+							DAL.CursoDAL dal = new DAL.CursoDAL();
+
+							Models.Curso c = dal.ObterCurso(curso);
+							if (c != null)
+							{
+								response.FulfillmentText = "A mensalidade para " + c.Nome + " é " + c.Preco + ".";
+							}
+						}
+					}
+				}
+					
+
+			}
+
+			return Ok(response);
+
+
+		}
+
+		[HttpPost("GetWebhookResponse2")]
+		public ActionResult GetWebhookResponse2([FromBody] System.Text.Json.JsonElement dados)
+		{
+			if (!Autorizado(Request.Headers))
+			{
+				return StatusCode(401);
+			}
+
+			WebhookRequest request =
+				_jsonParser.Parse<WebhookRequest>(dados.GetRawText());
+
+			WebhookResponse response = new WebhookResponse();
+
+
+			if (request != null)
+			{
+
+				string action = request.QueryResult.Action;
+
+				if (action == "ActionTesteWH")
+				{
 
 					response.FulfillmentText = "testando o webhook 2";
 				}
@@ -82,7 +154,8 @@ namespace WebhookDF.Controllers
 
 
 		}
-		
+
+
 	}
 }
  
