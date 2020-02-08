@@ -1123,3 +1123,4 @@ D:\webhook\obj\Debug\netcoreapp3.1\WebhookDF.RazorTargetAssemblyInfo.cache
 D:\webhook\obj\Debug\netcoreapp3.1\WebhookDF.csproj.CopyComplete
 D:\webhook\obj\Debug\netcoreapp3.1\WebhookDF.dll
 D:\webhook\obj\Debug\netcoreapp3.1\WebhookDF.pdb
+D:\webhook\bin\Debug\netcoreapp3.1\cursos2-jaijhy-9696e07beee3.json

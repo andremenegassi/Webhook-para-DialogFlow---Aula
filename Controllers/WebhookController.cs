@@ -22,6 +22,8 @@ namespace WebhookDF.Controllers
 			PropertyNameCaseInsensitive = true
 		};
 
+		string _agentName = "cursos2-jaijhy";
+
 		public WebhookController()
 		{
 		}
@@ -162,6 +164,168 @@ namespace WebhookDF.Controllers
 			return Ok(response);
 
 
+		}
+
+		[HttpGet("[action]")]
+		public ActionResult CriarEntidade()
+		{
+			//usa credencias
+
+			Google.Cloud.Dialogflow.V2.EntityTypesClient c = EntityTypesClient.Create();
+
+			EntityType entidade = new EntityType();
+			entidade.DisplayName = "Cursos";
+			entidade.Kind = EntityType.Types.Kind.Map;
+
+			DAL.CursoDAL dal = new DAL.CursoDAL();
+
+			foreach (var curso in dal.ObterTodos())
+			{
+				var item = new EntityType.Types.Entity();
+				item.Value = curso.Nome;
+
+				foreach (var s in curso.Sinonimos)
+				{
+					item.Synonyms.Add(s);
+				}
+
+				entidade.Entities.Add(new EntityType.Types.Entity(item));
+			}
+
+			var request = new Google.Cloud.Dialogflow.V2.CreateEntityTypeRequest();
+			request.EntityType = entidade;
+			request.ParentAsProjectAgentName = new ProjectAgentName(_agentName);
+
+			c.CreateEntityType(request);
+
+
+			return Ok("Entidade criada.");
+
+		}
+
+		[HttpGet("[action]")]
+		public ActionResult ExcluirEntidade(bool apenasItens = false)
+		{
+			//usa credencias
+
+			Google.Cloud.Dialogflow.V2.EntityTypesClient c = EntityTypesClient.Create();
+
+			var list = c.ListEntityTypes(new ProjectAgentName(_agentName));
+
+			foreach (var entidade in list)
+			{
+
+				if (entidade.DisplayName == "Cursos")
+				{
+
+					if (apenasItens)
+					{
+						c.BatchDeleteEntities(entidade.EntityTypeName,
+							entidade.Entities.Select(e => e.Value).ToArray());
+					}
+					else {
+						c.DeleteEntityType(entidade.EntityTypeName);
+					}
+
+					break;
+				}
+			}
+
+
+
+			return Ok("Entidade excluída.");
+
+		}
+
+
+		[HttpGet("[action]")]
+		public ActionResult AlterarEntidade()
+		{
+			//usa credencias
+
+			Google.Cloud.Dialogflow.V2.EntityTypesClient c = EntityTypesClient.Create();
+
+			var list = c.ListEntityTypes(new ProjectAgentName(_agentName));
+
+			foreach (var entidade in list)
+			{
+
+				if (entidade.DisplayName == "Cursos")
+				{
+					var item = entidade.Entities.Where(e => e.Value == "Sistemas de Informação").FirstOrDefault();
+
+					if (item != null)
+					{
+						item.Synonyms.Add("BSI2");
+
+						var request = new Google.Cloud.Dialogflow.V2.UpdateEntityTypeRequest();
+						request.EntityType = entidade;
+						c.UpdateEntityType(request);
+					}
+
+					break;
+				}
+			}
+
+
+
+			return Ok("Entidade alterada.");
+
+		}
+
+
+		[HttpGet("[action]")]
+		public ActionResult CriarIntencao()
+		{
+			Google.Cloud.Dialogflow.V2.IntentsClient c = IntentsClient.Create();
+
+			Intent intent = new Intent();
+			intent.DisplayName = "Curso.Nome";
+
+			var frase1 = new Intent.Types.TrainingPhrase();
+			frase1.Parts.Add(new Intent.Types.TrainingPhrase.Types.Part()
+			{
+				Text = "Qual o valor do curso de "
+
+			});
+
+			frase1.Parts.Add(new Intent.Types.TrainingPhrase.Types.Part()
+			{
+				Text = "sistemas de informação",
+				EntityType = "Cursos"
+			});
+
+
+			var frase2 = new Intent.Types.TrainingPhrase();
+			frase2.Parts.Add(new Intent.Types.TrainingPhrase.Types.Part()
+			{
+				Text = "Qual o preço do curso de "
+
+			});
+
+			frase2.Parts.Add(new Intent.Types.TrainingPhrase.Types.Part()
+			{
+				Text = "sistemas de informação",
+				EntityType = "Cursos"
+			});
+
+
+			intent.TrainingPhrases.Add(frase1);
+			intent.TrainingPhrases.Add(frase2);
+
+			var resposta = new Intent.Types.Message();
+			resposta.Text = new Intent.Types.Message.Types.Text();
+			resposta.Text.Text_.Add("1000.00");
+)
+			intent.Messages.Add(resposta);
+
+			var request = new Google.Cloud.Dialogflow.V2.CreateIntentRequest();
+			request.Intent = intent;
+			request.ParentAsProjectAgentName = new ProjectAgentName(_agentName);
+
+			c.CreateIntent(request);
+
+			return Ok("Entidade criada");
 		}
 
 
