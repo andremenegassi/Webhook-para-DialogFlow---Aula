@@ -52,7 +52,37 @@ namespace WebhookDF.Controllers
 			return false;
 		}
 		
-		
+
+		[HttpPost]
+		public ActionResult GetWebhookResponse([FromBody] System.Text.Json.JsonElement dados)
+		{
+			if (!Autorizado(Request.Headers))
+			{
+				return StatusCode(401);
+			}
+
+			WebhookRequest request =
+				_jsonParser.Parse<WebhookRequest>(dados.GetRawText());
+
+			WebhookResponse response = new WebhookResponse();
+
+
+			if (request != null)
+			{
+
+				string action = request.QueryResult.Action;
+
+				if (action == "ActionTesteWH") {
+
+					response.FulfillmentText = "testando o webhook";
+				}
+
+			}
+
+			return Ok(response);
+
+
+		}
 		
 	}
 }
