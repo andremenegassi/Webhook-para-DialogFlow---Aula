@@ -316,7 +316,7 @@ namespace WebhookDF.Controllers
 			var resposta = new Intent.Types.Message();
 			resposta.Text = new Intent.Types.Message.Types.Text();
 			resposta.Text.Text_.Add("1000.00");
-)
+
 			intent.Messages.Add(resposta);
 
 			var request = new Google.Cloud.Dialogflow.V2.CreateIntentRequest();

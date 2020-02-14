@@ -1124,3 +1124,11 @@ D:\webhook\obj\Debug\netcoreapp3.1\WebhookDF.csproj.CopyComplete
 D:\webhook\obj\Debug\netcoreapp3.1\WebhookDF.dll
 D:\webhook\obj\Debug\netcoreapp3.1\WebhookDF.pdb
 D:\webhook\bin\Debug\netcoreapp3.1\cursos2-jaijhy-9696e07beee3.json
+C:\Temp\webhook-aula\obj\Debug\netcoreapp3.1\WebhookDF.csprojAssemblyReference.cache
+C:\Temp\webhook-aula\obj\Debug\netcoreapp3.1\staticwebassets\WebhookDF.StaticWebAssets.Manifest.cache
+C:\Temp\webhook-aula\obj\Debug\netcoreapp3.1\staticwebassets\WebhookDF.StaticWebAssets.xml
+C:\Temp\webhook-aula\obj\Debug\netcoreapp3.1\WebhookDF.MvcApplicationPartsAssemblyInfo.cache
+C:\Temp\webhook-aula\obj\Debug\netcoreapp3.1\WebhookDF.AssemblyInfoInputs.cache
+C:\Temp\webhook-aula\obj\Debug\netcoreapp3.1\WebhookDF.AssemblyInfo.cs
+C:\Temp\webhook-aula\obj\Debug\netcoreapp3.1\WebhookDF.dll
+C:\Temp\webhook-aula\obj\Debug\netcoreapp3.1\WebhookDF.pdb
