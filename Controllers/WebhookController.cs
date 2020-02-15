@@ -125,7 +125,16 @@ namespace WebhookDF.Controllers
 						}
 					}
 				}
-					
+
+				else if (action == "ActionTesteWHPayload")
+				{
+					var contexto = request.QueryResult.OutputContexts;
+
+					response.FulfillmentText = "Teste Payload no WH com sucess.";
+					var payload = "{\"list\": {\"replacementKey\": \"@contexto\",\"invokeEvent\": true,\"afterDialog\": true,\"itemsName\": [\"Sim\",\"Não\"],\"itemsEventName\": [\"QueroInscrever\",\"NaoQueroInscrever\"]}}";
+					response.Payload = Google.Protobuf.WellKnownTypes.Struct.Parser.ParseJson(payload);
+				}
+
 
 			}
 
