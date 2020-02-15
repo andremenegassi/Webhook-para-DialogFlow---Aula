@@ -19,10 +19,11 @@ namespace WebhookDF.Controllers
 
 		private ProjectAgentName _projectAgentName = new ProjectAgentName("cursos2-jaijhy");
 
-		public BotController()
+		public BotController(IWebHostEnvironment env)
 		{
-			Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", "");
 
+			Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS",
+				env.ContentRootPath + @"\cursos2-jaijhy-9696e07beee3.json");
 		}
 
 		[HttpGet("[action]")]
