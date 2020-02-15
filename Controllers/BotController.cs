@@ -23,7 +23,7 @@ namespace WebhookDF.Controllers
 		{
 
 			Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS",
-				env.ContentRootPath + @"\cursos2-jaijhy-9696e07beee3.json");
+				env.ContentRootPath + @"//cursos2-jaijhy-9696e07beee3.json");
 		}
 
 		[HttpGet("[action]")]
