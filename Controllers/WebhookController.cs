@@ -130,12 +130,15 @@ namespace WebhookDF.Controllers
 				{
 					var contexto = request.QueryResult.OutputContexts;
 
-					response.FulfillmentText = "Teste Payload no WH com sucesso.";
 					var payload = "{\"list\": {\"replacementKey\": \"@contexto\",\"invokeEvent\": true,\"afterDialog\": true,\"itemsName\": [\"Sim\",\"Não\"],\"itemsEventName\": [\"QueroInscrever\",\"NaoQueroInscrever\"]}}";
 
-					var p = new Intent.Types.Message();
-					p.Payload = Google.Protobuf.WellKnownTypes.Struct.Parser.ParseJson(payload);
-					response.FulfillmentMessages.Add(p);
+
+					response = new WebhookResponse()
+					{
+						FulfillmentText = "Teste Payload no WH com sucesso...",
+						Payload = Google.Protobuf.WellKnownTypes.Struct.Parser.ParseJson(payload)
+					};
+
 					
 				}
 
