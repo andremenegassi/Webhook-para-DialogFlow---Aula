@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Temp\\webhook-aula\\WebhookDF.csproj": {}
+    "D:\\webhook\\WebhookDF.csproj": {}
   },
   "projects": {
-    "C:\\Temp\\webhook-aula\\WebhookDF.csproj": {
+    "D:\\webhook\\WebhookDF.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Temp\\webhook-aula\\WebhookDF.csproj",
+        "projectUniqueName": "D:\\webhook\\WebhookDF.csproj",
         "projectName": "WebhookDF",
-        "projectPath": "C:\\Temp\\webhook-aula\\WebhookDF.csproj",
-        "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
-        "outputPath": "C:\\Temp\\webhook-aula\\obj\\",
+        "projectPath": "D:\\webhook\\WebhookDF.csproj",
+        "packagesPath": "C:\\Users\\Aluno\\.nuget\\packages\\",
+        "outputPath": "D:\\webhook\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Aluno\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

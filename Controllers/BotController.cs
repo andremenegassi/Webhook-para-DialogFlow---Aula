@@ -15,7 +15,15 @@ namespace WebhookDF.Controllers
     [Route("api/[controller]")]
     public class BotController : ControllerBase
     {
+
+
 		private ProjectAgentName _projectAgentName = new ProjectAgentName("cursos2-jaijhy");
+
+		public BotController()
+		{
+			Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", "");
+
+		}
 
 		[HttpGet("[action]")]
 		public ActionResult DetectIntentFromTexts(string q, string sessionId)
